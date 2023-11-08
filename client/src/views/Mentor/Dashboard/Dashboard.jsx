@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getMentor, getClassrooms } from '../../../Utils/requests';
+import React, { useEffect, useState, useRef } from 'react';
+import { getMentor, getClassrooms, createClassroom, deleteClassroom } from '../../../Utils/requests';
 import { message } from 'antd';
 import './Dashboard.less';
 import DashboardDisplayCodeModal from './DashboardDisplayCodeModal';
@@ -11,7 +11,9 @@ import { useNavigate } from 'react-router-dom';
 export default function Dashboard() {
   const [classrooms, setClassrooms] = useState([]);
   const [value] = useGlobalState('currUser');
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const newName = useRef('');
+    const newId = useRef('');
 
   useEffect(() => {
     let classroomIds = [];
@@ -29,6 +31,16 @@ export default function Dashboard() {
       }
     });
   }, []);
+    const deleteClass = (classroomId) => {
+        deleteClassroom(classroomId);
+    };
+    function newClassroom() {
+        const newClass = {
+            id: newId.current.value,
+            name: newName.current.value
+        }
+        createClassroom(newClass.id, newClass.name);
+    };
 
   const handleViewClassroom = (classroomId) => {
     navigate(`/classroom/${classroomId}`);
@@ -38,9 +50,9 @@ export default function Dashboard() {
     <div className='container nav-padding'>
       <NavBar />
       <div id='main-header'>Welcome {value.name}</div>
-      <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
+          <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
       <div id='classrooms-container'>
-        <div id='dashboard-card-container'>
+              <div id='dashboard-card-container'>
           {classrooms.map((classroom) => (
             <div key={classroom.id} id='dashboard-class-card'>
               <div id='card-left-content-container'>
@@ -48,7 +60,10 @@ export default function Dashboard() {
                 <div id='card-button-container' className='flex flex-row'>
                   <button onClick={() => handleViewClassroom(classroom.id)}>
                     View
-                  </button>
+                   </button>
+                   <button onClick={() => deleteClass(classroom.id)}>
+                    Delete
+                    </button>
                 </div>
               </div>
               <div id='card-right-content-container'>
@@ -61,6 +76,16 @@ export default function Dashboard() {
               </div>
             </div>
           ))}
+                  <div id='dashboard-class-card'>
+                      <h1 id='card-title'> Add Class </h1>
+                      <div id='card-button-container'>
+                          <input ref={newName} type="text" placeholder="Name" />
+                          <input ref={newId} type="text" placeholder="Id" />
+                          <button onClick={newClassroom}>
+                              Add
+                          </button>
+                      </div>
+                  </div>
         </div>
       </div>
     </div>

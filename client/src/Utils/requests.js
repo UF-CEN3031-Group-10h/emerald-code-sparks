@@ -687,3 +687,20 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+export const deleteClassroom = async (id) =>
+    makeRequest({
+        method: DELETE,
+        path: `${server}/classroom/${id}`,
+        auth: true,
+        error: 'Unable to remove classroom',
+    });
+export const createClassroom = async (id, title) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/classroom/${id}`,
+        auth: true,
+        data: {
+            name: title
+        },
+        error: 'Unable to create new classroom',
+    });
