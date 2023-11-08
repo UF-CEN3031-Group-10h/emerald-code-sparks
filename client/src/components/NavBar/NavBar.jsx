@@ -42,6 +42,12 @@ export default function NavBar() {
           &nbsp; Dashboard
         </Menu.Item>
       ) : null}
+      {((value.org !== undefined)) ? (
+        <Menu.Item key='9' onClick={() => handleRouteChange(routes.OrganizationDashboard)}>
+          <i className='fa fa-home' />
+          &nbsp; Organization Dashboard
+        </Menu.Item>
+      ) : null}
       {shouldShowRoute('ContentCreatorDashboard') ? (
         <Menu.Item
           key='2'
@@ -110,12 +116,12 @@ export default function NavBar() {
           value.role === 'ContentCreator'
             ? '/ccdashboard'
             : value.role === 'Mentor'
-            ? '/dashboard'
-            : value.role === 'Student'
-            ? '/student'
-            : value.role === 'Researcher'
-            ? '/report'
-            : '/'
+              ? '/dashboard'
+              : value.role === 'Student'
+                ? '/student'
+                : value.role === 'Researcher'
+                  ? '/report'
+                  : '/'
         }
       >
         <img src={Logo} id='casmm-logo' alt='logo' />

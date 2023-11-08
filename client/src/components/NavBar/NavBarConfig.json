@@ -1,10 +1,12 @@
 {
   "routes": {
     "TeacherLogin": "/teacherlogin",
+    "OrganizationLogin": "/organizationlogin",
     "Sandbox": "/sandbox",
     "About": "/about",
     "Home": "/",
     "Dashboard": "/dashboard",
+    "OrganizationDashboard": "/organizationdashboard",
     "SignOut": "/",
     "AccountInfo": "/account",
     "ContentCreatorDashboard": "/ccdashboard",
@@ -12,7 +14,7 @@
     "BugReport": "/bugreport"
   },
   "users": {
-    "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About"],
+    "DefaultUser": ["Home", "TeacherLogin", "OrganizationLogin", "Sandbox", "About"],
     "Mentor": ["Dashboard", "AccountInfo", "SignOut", "Sandbox", "BugReport"],
     "Student": ["SignOut"],
     "ContentCreator": [

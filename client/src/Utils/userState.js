@@ -8,26 +8,38 @@ export const getCurrUser = () => {
       role: 'DefaultUser',
     };
   }
+  var obj = Object();
   if (!result.role) {
-    return {
-      role: 'Student',
-    };
+    // return {
+    //   role: 'Student',
+    // };
+    obj.role = 'Student';
   } else if (result.role.type === 'content_creator') {
-    return {
-      role: 'ContentCreator',
-      name: result.role.name,
-    };
+    // return {
+    //   role: 'ContentCreator',
+    //   name: result.role.name,
+    // };
+    obj.role = 'ContentCreator';
+    obj.name = result.role.name;
   } else if (result.role.type === 'researcher') {
-    return {
-      role: 'Researcher',
-      name: result.role.name,
-    };
+    // return {
+    //   role: 'Researcher',
+    //   name: result.role.name,
+    // };
+    obj.role = 'Researcher';
+    obj.name = result.role.name;
   } else if (result.role.type === 'authenticated') {
-    return {
-      role: 'Mentor',
-      name: result.role.name,
-    };
+    // return {
+    //   role: 'Mentor',
+    //   name: result.role.name,
+    // };
+    obj.role = 'Mentor';
+    obj.name = result.role.name;
   }
+  if (!(result.organization === null)) {
+    obj.org = result.organization.Name;
+  }
+  return obj;
 };
 
 const { setGlobalState, useGlobalState } = createGlobalState({

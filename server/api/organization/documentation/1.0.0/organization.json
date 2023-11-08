@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/mentors": {
+    "/organizations": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Mentor"
+                    "$ref": "#/components/schemas/Organization"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Mentor"
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMentor"
+                "$ref": "#/components/schemas/NewOrganization"
               }
             }
           }
         }
       }
     },
-    "/mentors/count": {
+    "/organizations/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
         ],
         "parameters": []
       }
     },
-    "/mentors/{id}": {
+    "/organizations/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Mentor"
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Mentor"
+                  "$ref": "#/components/schemas/Organization"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMentor"
+                "$ref": "#/components/schemas/NewOrganization"
               }
             }
           }
@@ -495,7 +495,75 @@
         },
         "summary": "",
         "tags": [
-          "Mentor"
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/organizations/{id}/users": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Organization"
         ],
         "parameters": [
           {
@@ -514,109 +582,59 @@
   },
   "components": {
     "schemas": {
-      "Mentor": {
+      "Organization": {
         "required": [
-          "id"
+          "id",
+          "Name"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "first_name": {
+          "Name": {
             "type": "string"
           },
-          "last_name": {
-            "type": "string"
-          },
-          "school": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "county": {
-                "type": "string"
-              },
-              "state": {
-                "type": "string"
-              },
-              "classrooms": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "mentors": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "classrooms": {
+          "users": {
             "type": "array",
             "items": {
               "required": [
                 "id",
-                "code"
+                "username",
+                "email"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "name": {
+                "username": {
                   "type": "string"
                 },
-                "school": {
+                "email": {
                   "type": "string"
                 },
-                "sessions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "mentors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "students": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "code": {
+                "provider": {
                   "type": "string"
                 },
-                "grade": {
+                "password": {
                   "type": "string"
                 },
-                "selections": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "resetPasswordToken": {
+                  "type": "string"
                 },
-                "authorized_workspaces": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "organization": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -627,75 +645,29 @@
               }
             }
           },
-          "user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "organization": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewMentor": {
+      "NewOrganization": {
+        "required": [
+          "Name"
+        ],
         "properties": {
-          "first_name": {
+          "Name": {
             "type": "string"
           },
-          "last_name": {
-            "type": "string"
-          },
-          "school": {
-            "type": "string"
-          },
-          "classrooms": {
+          "users": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "user": {
-            "type": "string"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -709,7 +681,7 @@
   },
   "tags": [
     {
-      "name": "Mentor"
+      "name": "Organization"
     }
   ]
 }

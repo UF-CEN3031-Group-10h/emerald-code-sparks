@@ -44,6 +44,21 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   return { data: res, err: err };
 };
 
+export const getAllOrgs = async () => 
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations`,
+    auth: true,
+    error: 'Faild to get list of orgs'
+  });
+
+export const getOrgUsers = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations/${id}/users`,
+    auth: true,
+    error: 'Organization users could not be retrieved.'
+    })
 export const getActivities = async () =>
   makeRequest({
     method: GET,
