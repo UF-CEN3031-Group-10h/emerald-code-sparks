@@ -20,6 +20,13 @@
       "plugin": "users-permissions",
       "collection": "user",
       "via": "organization"
+    },
+    "classrooms": {
+      "collection": "classroom"
+    },
+    "mentors": {
+      "via": "organization",
+      "collection": "mentor"
     }
   }
 }

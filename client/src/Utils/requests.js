@@ -43,14 +43,20 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
 
   return { data: res, err: err };
 };
-
-export const getAllOrgs = async () => 
-  makeRequest({
-    method: GET,
-    path: `${server}/organizations`,
-    auth: true,
-    error: 'Faild to get list of orgs'
-  });
+export const getAllOrgs = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/organizations`,
+        auth: true,
+        error: 'Faild to get list of orgs'
+    });
+export const getOrgClasses = async (id) =>
+        makeRequest({
+            method: GET,
+            path: `${server}/organizations/${id}/classes`,
+            auth: true,
+            error: 'Faild to get list of org classes'
+        });
 
 export const getOrgUsers = async (id) =>
   makeRequest({
@@ -58,6 +64,13 @@ export const getOrgUsers = async (id) =>
     path: `${server}/organizations/${id}/users`,
     auth: true,
     error: 'Organization users could not be retrieved.'
+  })
+export const getOrgMentors = async (id) =>
+    makeRequest({
+        method: GET,
+        path: `${server}/organizations/${id}/mentors`,
+        auth: true,
+        error: 'Organization mentors could not be retrieved.'
     })
 export const getActivities = async () =>
   makeRequest({
@@ -697,7 +710,7 @@ export const deleteClassroom = async (id) =>
 export const createClassroom = async (id, title) =>
     makeRequest({
         method: POST,
-        path: `${server}/classroom/${id}`,
+        path: `${server}/classroom`,
         auth: true,
         data: {
             name: title

@@ -9,6 +9,7 @@ import OrganizationDashSideBar from './OrgDashboardSidebar';
 import OrganizationHome from './DashboardPages/Home';
 import OrganizationUsers from './DashboardPages/Users';
 import OrganizationModeration from './DashboardPages/Moderation';
+import OrganizationClasses from './DashboardPages/Classes'
 
 
 
@@ -30,7 +31,8 @@ export default function OrganizationDashboard() {
   const OrgPages = {
     Home: ["", <OrganizationHome />],
     Users: ["/users", <OrganizationUsers />],
-    Moderation: ["/moderation", <OrganizationModeration />]
+    Moderation: ["/moderation", <OrganizationModeration />],
+    Classrooms: ["/classes", <OrganizationClasses />]
   };
   if (value.org === undefined) { return NonOrgMember(); }
   return (
