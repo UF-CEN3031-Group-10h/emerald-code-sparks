@@ -19,28 +19,34 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
-import OrganizationLogin from './views/OrganizationLogin/OrganizationLogin'
+import OrganizationLogin from './views/OrganizationLogin/OrganizationLogin';
 import OrganizationDashboard from './views/OrganizationDashboard/OrganizationDashboard';
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/teacherlogin' element={<TeacherLogin />} />
-        <Route path='/forgot-password' element={<ForgetPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/login' element={<StudentLogin />} />
-        <Route path='/replay/:saveID' element={<Replay />} />
-        <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-        <Route path='/organizationlogin' element={<OrganizationLogin />} />
-
-        <Route path='/organizationdashboard' element={<OrganizationDashboard />} />
-        <Route path='/organizationdashboard/*' element={<OrganizationDashboard />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/teacherlogin" element={<TeacherLogin />} />
+        <Route path="/forgot-password" element={<ForgetPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/login" element={<StudentLogin />} />
+        <Route path="/replay/:saveID" element={<Replay />} />
+        <Route path="/sandbox" element={<BlocklyPage isSandbox={true} />} />
+        <Route path="/organizationlogin" element={<OrganizationLogin />} />
 
         <Route
-          path='/report'
+          path="/organizationdashboard"
+          element={<OrganizationDashboard />}
+        />
+        <Route
+          path="/organizationdashboard/*"
+          element={<OrganizationDashboard />}
+        />
+
+        <Route
+          path="/report"
           element={
             <PrivateRoute>
               <Report />
@@ -48,7 +54,7 @@ const App = () => {
           }
         />
         <Route
-          path='/activityLevel'
+          path="/activityLevel"
           element={
             <PrivateRoute>
               <ActivityLevelReport />
@@ -56,7 +62,7 @@ const App = () => {
           }
         />
         <Route
-          path='/activityLevel/:id'
+          path="/activityLevel/:id"
           element={
             <PrivateRoute>
               <ActivityLevelReportView />
@@ -64,7 +70,7 @@ const App = () => {
           }
         />
         <Route
-          path='/group-report'
+          path="/group-report"
           element={
             <PrivateRoute>
               <GroupReport />
@@ -72,7 +78,7 @@ const App = () => {
           }
         />
         <Route
-          path='/dashboard'
+          path="/dashboard"
           element={
             <PrivateRoute>
               <Dashboard />
@@ -80,7 +86,7 @@ const App = () => {
           }
         />
         <Route
-          path='/student'
+          path="/student"
           element={
             <PrivateRoute>
               <Student />
@@ -88,7 +94,7 @@ const App = () => {
           }
         />
         <Route
-          path='/classroom/:id'
+          path="/classroom/:id"
           element={
             <PrivateRoute>
               <Classroom />
@@ -96,7 +102,7 @@ const App = () => {
           }
         />
         <Route
-          path='/workspace'
+          path="/workspace"
           element={
             <PrivateRoute>
               <BlocklyPage isSandbox={false} />
@@ -104,7 +110,7 @@ const App = () => {
           }
         />
         <Route
-          path='/activity'
+          path="/activity"
           element={
             <PrivateRoute>
               <BlocklyPage isSandbox={false} />
@@ -112,15 +118,15 @@ const App = () => {
           }
         />
         <Route
-          path='/ccdashboard'
+          path="/ccdashboard"
           element={
             <PrivateRoute>
               <ContentCreator />
             </PrivateRoute>
           }
         />
-        <Route path='/bugreport' element={<BugReport />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="/bugreport" element={<BugReport />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
