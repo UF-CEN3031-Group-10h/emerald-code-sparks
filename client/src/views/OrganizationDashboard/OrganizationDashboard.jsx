@@ -66,8 +66,6 @@ export default function OrganizationDashboard() {
           <OrganizationClasses />
         </TabPane>
       </Tabs>
-      <OrganizationDashSideBar pages={OrgPages} />
-      {/* <OrgDashboardPage /> */}
     </div>
   );
 }
