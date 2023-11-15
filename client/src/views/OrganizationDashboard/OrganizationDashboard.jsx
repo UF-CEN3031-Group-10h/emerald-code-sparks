@@ -9,7 +9,7 @@ import './OrganizationDashboard.less';
 import OrganizationDashSideBar from './OrgDashboardSidebar';
 import OrganizationHome from './DashboardPages/Home';
 import OrganizationUsers from './DashboardPages/Users';
-import OrganizationModeration from './DashboardPages/Moderation';
+import OrganizationModeration from './DashboardPages/Moderation/Moderation';
 import OrganizationClasses from './DashboardPages/Classes';
 import { useSearchParams } from 'react-router-dom';
 
