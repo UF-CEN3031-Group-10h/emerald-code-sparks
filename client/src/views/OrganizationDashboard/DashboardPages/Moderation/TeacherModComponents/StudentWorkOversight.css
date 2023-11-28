@@ -1,0 +1,70 @@
+/* StudentWorkOversight.css */
+
+.student-work-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.student-work-title {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+.student-work-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student-work-item {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.work-details {
+  margin-right: 10px;
+}
+
+.student-work-container .action-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+}
+
+.review-button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  &:hover {
+    background-color: #138496;
+  }
+}
+
+.feedback-button {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e0a800;
+  }
+}

@@ -35,6 +35,13 @@ export const getCurrUser = () => {
     // };
     obj.role = 'Mentor';
     obj.name = result.role.name;
+  } else if (result.role.type === 'admin') {
+    // return {
+    //   role: 'Admin',
+    //   name: result.role.name,
+    // };
+    obj.role = 'Admin';
+    obj.name = result.role.name;
   }
   if (!(result.organization === null)) {
     obj.org = result.organization.Name;

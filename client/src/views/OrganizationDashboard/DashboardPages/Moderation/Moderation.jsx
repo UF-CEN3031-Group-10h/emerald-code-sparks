@@ -12,7 +12,7 @@ export default function OrganizationModeration() {
 
   return (
     <div>
-      <div id="main-header2">Moderation Tools</div>
+      <div id="main-header2">Teacher Moderation Tools</div>
       <div>
         <div>
           <div className="switch-role">

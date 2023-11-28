@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../Moderation/Moderation.css';
 import ClassroomForm from './AdminModComponents/ClassroomForm';
+import TeacherAssignment from './AdminModComponents/TeacherAssignment';
+import ClassroomDetails from './AdminModComponents/ClassroomDetails';
+import AdminNotificationSystem from './AdminModComponents/AdminNotificationSystem';
 
 const ModerationAdmin = () => {
   // const [selectedCategory, setSelectedCategory] = useState(null);
@@ -59,35 +62,11 @@ const ModerationAdmin = () => {
           </div>
         );
       case 'Teacher Assignment and Role Management':
-        // TODO: frontend ui for assigning teachers to classrooms and managing their roles
-        return (
-          <div className="category-content">
-            <div className="category-title">
-              Teacher Assignment and Role Management
-            </div>
-            {/* frontend ui for assigning and managing teacher roles here */}
-          </div>
-        );
+        return <TeacherAssignment />;
       case 'Classroom Details and Organization':
-        // TODO: frontend ui for displaying and organizing classroom details
-        return (
-          <div className="category-content">
-            <div className="category-title">
-              Classroom Details and Organization
-            </div>
-            {/* frontend ui for displaying classroom names, descriptions, and associated teachers and students here */}
-          </div>
-        );
+        return <ClassroomDetails />;
       case 'Notification System for Teachers':
-        // TODO: frontend ui for managing notifications sent to teachers
-        return (
-          <div className="category-content">
-            <div className="category-title">
-              Notification System for Teachers
-            </div>
-            {/* frontend ui for configuring and sending notifications to teachers here */}
-          </div>
-        );
+        return <AdminNotificationSystem />;
       default:
         return (
           <div className="default-category">
@@ -98,23 +77,26 @@ const ModerationAdmin = () => {
   };
 
   return (
-    <div className="moderation-teacher-container">
-      <div className="settings-categories">
-        {settingsCategories.map((category) => (
-          <div
-            key={category}
-            className={`category-item ${
-              selectedCategory === category ? 'active' : ''
-            }`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </div>
-        ))}
-      </div>
-      <div className="settings-divider" />
-      <div className="category-details">
-        {renderCategoryDetails(selectedCategory)}
+    <div>
+      <div id="main-header2">Admin Moderation Tools</div>
+      <div className="moderation-teacher-container">
+        <div className="settings-categories">
+          {settingsCategories.map((category) => (
+            <div
+              key={category}
+              className={`category-item ${
+                selectedCategory === category ? 'active' : ''
+              }`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+        <div className="settings-divider" />
+        <div className="category-details">
+          {renderCategoryDetails(selectedCategory)}
+        </div>
       </div>
     </div>
   );

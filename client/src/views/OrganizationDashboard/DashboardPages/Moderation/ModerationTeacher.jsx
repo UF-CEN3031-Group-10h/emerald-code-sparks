@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../Moderation/Moderation.css';
+import ContentMonitoring from '../Moderation/TeacherModComponents/ContentMonitoring';
+import StudentWorkOversight from '../Moderation/TeacherModComponents/StudentWorkOversight';
+import TeacherNotificationSystem from './TeacherModComponents/TeacherNotificationSystem';
 
 const ModerationTeacher = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -14,23 +17,11 @@ const ModerationTeacher = () => {
   const renderCategoryDetails = (category) => {
     switch (category) {
       case 'Content Monitoring and Filtering':
-        return (
-          <div className="">
-            <div className="category-title">Flagged Content</div>
-          </div>
-        );
+        return <ContentMonitoring />;
       case 'Visibility and Oversight of Student Work':
-        return (
-          <div className="">
-            <div className="category-title">Student Work</div>
-          </div>
-        );
+        return <StudentWorkOversight />;
       case 'Notification System':
-        return (
-          <div className="">
-            <div className="category-title">Notifications</div>
-          </div>
-        );
+        return <TeacherNotificationSystem />;
       default:
         return (
           <div className="default-category">

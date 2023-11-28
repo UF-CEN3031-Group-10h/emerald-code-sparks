@@ -1,0 +1,37 @@
+/* AdminNotificationSystem.css */
+
+.admin-notification-system-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.admin-notification-system-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.send-notification-button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.teacher-select-dropdown {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}

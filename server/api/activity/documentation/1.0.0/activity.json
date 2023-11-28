@@ -886,6 +886,57 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "flagged_contents": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "activity": {
+                  "type": "string"
+                },
+                "users_permissions_user": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "date_flagged": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "pending_review",
+                    "approved",
+                    "rejected"
+                  ]
+                },
+                "admin_permissions_user": {
+                  "type": "string"
+                },
+                "action_taken": {
+                  "type": "string"
+                },
+                "review_date": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -930,6 +981,12 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "flagged_contents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

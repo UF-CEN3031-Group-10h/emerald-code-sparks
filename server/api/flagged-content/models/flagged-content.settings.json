@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flagged_contents",
+  "info": {
+    "name": "Flagged Content"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "activity": {
+      "model": "activity",
+      "via": "flagged_contents"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "date_flagged": {
+      "type": "datetime"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending_review",
+        "approved",
+        "rejected"
+      ]
+    },
+    "admin_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "action_taken": {
+      "type": "richtext"
+    },
+    "review_date": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,11 +1,13 @@
 {
   "routes": {
     "TeacherLogin": "/teacherlogin",
+    "AdminLogin": "/adminlogin",
     "OrganizationLogin": "/organizationlogin",
     "Sandbox": "/sandbox",
     "About": "/about",
     "Home": "/",
     "Dashboard": "/dashboard",
+    "AdminDashboard": "/admindashboard",
     "OrganizationDashboard": "/organizationdashboard",
     "SignOut": "/",
     "AccountInfo": "/account",
@@ -24,6 +26,18 @@
       "SignOut",
       "BugReport"
     ],
-    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"]
+    "Researcher": ["ResearcherDashboard", "BugReport", "SignOut"],
+    "Admin": ["AdminLogin",
+      "Dashboard",
+      "OrganizationDashboard",
+      "AdminDashboard",
+      "ContentCreatorDashboard",
+      "ResearcherDashboard",
+      "AccountInfo",
+      "Sandbox",
+      "SignOut",
+      "BugReport",
+      "Home",
+      "About"]
   }
 }

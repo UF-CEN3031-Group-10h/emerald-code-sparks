@@ -1,12 +1,12 @@
 {
   "paths": {
-    "/learning-components": {
+    "/flagged-contents": {
       "get": {
         "deprecated": false,
-        "description": "Find all the learning-components's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve learning-components document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "parameters": [
           {
@@ -195,10 +195,10 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new learning-components record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve learning-components document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "requestBody": {
           "description": "",
@@ -252,20 +252,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewLearning-components"
+                "$ref": "#/components/schemas/NewFlagged-content"
               }
             }
           }
         }
       }
     },
-    "/learning-components/count": {
+    "/flagged-contents/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the number of learning-components documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve learning-components document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -311,18 +311,18 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "parameters": []
       }
     },
-    "/learning-components/{id}": {
+    "/flagged-contents/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one learning-components record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve learning-components document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "parameters": [
           {
@@ -385,10 +385,10 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single learning-components record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve learning-components document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewLearning-components"
+                "$ref": "#/components/schemas/NewFlagged-content"
               }
             }
           }
@@ -462,10 +462,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single learning-components record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single learning-components based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Learning-components"
+          "Flagged-content"
         ],
         "parameters": [
           {
@@ -527,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Learning-components": {
+      "Flagged-content": {
         "required": [
           "id"
         ],
@@ -535,81 +535,41 @@
           "id": {
             "type": "string"
           },
-          "type": {
-            "type": "string"
-          },
-          "activities": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "number",
-                "template"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "lesson_module": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "integer"
-                },
-                "template": {
-                  "type": "string"
-                },
-                "blocks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                },
-                "StandardS": {
-                  "type": "string"
-                },
-                "images": {
-                  "type": "string"
-                },
-                "link": {
-                  "type": "string"
-                },
-                "learning_components": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "activity_template": {
-                  "type": "string"
-                },
-                "flagged_contents": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "learning_component_type": {
+          "activity": {
             "required": [
-              "id"
+              "id",
+              "number",
+              "template"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "name": {
+              "lesson_module": {
+                "type": "string"
+              },
+              "number": {
+                "type": "integer"
+              },
+              "template": {
+                "type": "string"
+              },
+              "blocks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "StandardS": {
+                "type": "string"
+              },
+              "images": {
+                "type": "string"
+              },
+              "link": {
                 "type": "string"
               },
               "learning_components": {
@@ -618,7 +578,61 @@
                   "type": "string"
                 }
               },
-              "published_at": {
+              "activity_template": {
+                "type": "string"
+              },
+              "flagged_contents": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "users_permissions_user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "organization": {
                 "type": "string"
               },
               "created_by": {
@@ -629,25 +643,114 @@
               }
             }
           },
+          "reason": {
+            "type": "string"
+          },
+          "date_flagged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending_review",
+              "approved",
+              "rejected"
+            ]
+          },
+          "admin_permissions_user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "organization": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "action_taken": {
+            "type": "string"
+          },
+          "review_date": {
+            "type": "string",
+            "format": "date-time"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewLearning-components": {
+      "NewFlagged-content": {
         "properties": {
-          "type": {
+          "activity": {
             "type": "string"
           },
-          "activities": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "learning_component_type": {
+          "users_permissions_user": {
             "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "date_flagged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending_review",
+              "approved",
+              "rejected"
+            ]
+          },
+          "admin_permissions_user": {
+            "type": "string"
+          },
+          "action_taken": {
+            "type": "string"
+          },
+          "review_date": {
+            "type": "string",
+            "format": "date-time"
           },
           "published_at": {
             "type": "string",

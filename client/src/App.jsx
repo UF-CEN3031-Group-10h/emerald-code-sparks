@@ -21,6 +21,8 @@ import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
 import OrganizationLogin from './views/OrganizationLogin/OrganizationLogin';
 import OrganizationDashboard from './views/OrganizationDashboard/OrganizationDashboard';
+import AdminLogin from './views/AdminLogin/AdminLogin';
+import AdminDashboard from './views/AdminDashboard/AdminDashboard';
 
 const App = () => {
   return (
@@ -29,6 +31,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/teacherlogin" element={<TeacherLogin />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/forgot-password" element={<ForgetPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/login" element={<StudentLogin />} />
@@ -122,6 +125,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <ContentCreator />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admindashboard"
+          element={
+            <PrivateRoute>
+              <AdminDashboard />
             </PrivateRoute>
           }
         />
