@@ -707,13 +707,14 @@ export const deleteClassroom = async (id) =>
         auth: true,
         error: 'Unable to remove classroom',
     });
-export const createClassroom = async (id, title) =>
+export const createClassroom = async (classroomId, name) =>
     makeRequest({
         method: POST,
         path: `${server}/classroom`,
         auth: true,
         data: {
-            name: title
+            name,
+            classroomId
         },
         error: 'Unable to create new classroom',
     });

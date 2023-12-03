@@ -39,8 +39,15 @@ export default function OrganizationClasses() {
     }, []);
         const handleViewClassroom = (classroomId) => {
             navigate(`/classroom/${classroomId}`);
-        };
-        const deleteClass = (classroomId) => {
+    };
+    function confirmDelete(classroomId) {
+        if (confirm("Are you sure you want to delete this class?")) {
+            deleteClassroom(classroomId);
+        }
+
+    }
+    const deleteClass = (classroomId) => {
+
             deleteClassroom(classroomId);
         };
         function newClassroom() {
@@ -56,16 +63,6 @@ export default function OrganizationClasses() {
                 <NavBar isMentor={true} />
                 <div id='main-header'>Hello {user.username}</div>
                 <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
-                <div id='classrooms=container'>
-                    <h1 id='card-title'> Add Class </h1>
-                    <div id='card-button-container'>
-                        <input ref={newName} type="text" placeholder="Name" />
-                        <input ref={newId} type="text" placeholder="Id" />
-                        <button onClick={newClassroom}>
-                            Add
-                        </button>
-                    </div>
-                </div>
                 <div id='classrooms-container'>
                     <div id='dashboard-card-container'>
                         {classrooms.map((classroom) => (
@@ -76,12 +73,13 @@ export default function OrganizationClasses() {
                                         <button onClick={() => handleViewClassroom(classroom.id)}>
                                             View
                                         </button>
-                                        <button onClick={() => deleteClass(classroom.id)}>
-                                            Delete
-                                        </button>
+                                        
                                     </div>
                                 </div>
                                 <div id='card-right-content-container'>
+                                    <button onClick={() => confirmDelete(classroom.id)}>
+                                        Delete
+                                    </button>
                                     <DashboardDisplayCodeModal code={classroom.code} />
                                     <div id='divider' />
                                     <div id='student-number-container'>
@@ -91,6 +89,16 @@ export default function OrganizationClasses() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    <div id='classrooms-container'>
+                        <h1 id='card-title'> Add Class </h1>
+                        <div id='card-button-container'>
+                            <input ref={newName} type="text" placeholder="Name" />
+                            <input ref={newId} type="text" placeholder="Id" />
+                            <button onClick={newClassroom}>
+                                Add
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
