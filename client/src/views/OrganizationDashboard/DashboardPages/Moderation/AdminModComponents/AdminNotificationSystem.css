@@ -1,5 +1,3 @@
-/* AdminNotificationSystem.css */
-
 .admin-notification-system-container {
   padding: 20px;
   background-color: #f8f9fa;
@@ -7,13 +5,33 @@
   margin-top: 20px;
 }
 
-.admin-notification-system-container textarea {
+.admin-notification-system-container h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.label-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label-field label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.input-field {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  resize: vertical;
+}
+
+.input-field.date-picker,
+.input-field.time-picker {
+  display: block;
 }
 
 .send-notification-button {
@@ -23,15 +41,10 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  &:hover {
-    background-color: #0056b3;
-  }
+  display: block;
+  margin-top: 10px;
 }
 
-.teacher-select-dropdown {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
+.send-notification-button:hover {
+  background-color: #0056b3;
 }

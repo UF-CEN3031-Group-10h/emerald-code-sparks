@@ -760,3 +760,55 @@ export const reportFlaggedContent = async (flaggedData) =>
     auth: true,
     error: 'Failed to report flagged content.',
   });
+
+// NOTIFICATIONS API CALLS
+export const getNotifications = async () =>
+  makeRequest({
+    method: 'GET',
+    path: `${server}/notifications`,
+    auth: true,
+    error: 'Failed to retrieve notifications.',
+  });
+
+export const getNotification = async (id) =>
+  makeRequest({
+    method: 'GET',
+    path: `${server}/notifications/${id}`,
+    auth: true,
+    error: 'Failed to retrieve notification.',
+  });
+
+export const createNotification = async (notification) =>
+  makeRequest({
+    method: 'POST',
+    path: `${server}/notifications`,
+    data: notification,
+    auth: true,
+    error: 'Failed to create notification.',
+  });
+
+export const updateNotification = async (id, notification) =>
+  makeRequest({
+    method: 'PUT',
+    path: `${server}/notifications/${id}`,
+    data: notification,
+    auth: true,
+    error: 'Failed to update notification.',
+  });
+
+export const deleteNotification = async (id) =>
+  makeRequest({
+    method: 'DELETE',
+    path: `${server}/notifications/${id}`,
+    auth: true,
+    error: 'Failed to delete notification.',
+  });
+
+export const sendNotification = async (notification) =>
+  makeRequest({
+    method: 'POST',
+    path: `${server}/notifications/send`,
+    data: notification,
+    auth: true,
+    error: 'Failed to send notification.',
+  });

@@ -42,6 +42,8 @@ export const getCurrUser = () => {
     // };
     obj.role = 'Admin';
     obj.name = result.role.name;
+    // email
+    obj.email = result.role.email;
   }
   if (!(result.organization === null)) {
     obj.org = result.organization.Name;

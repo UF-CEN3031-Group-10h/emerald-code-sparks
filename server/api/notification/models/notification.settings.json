@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "name": "Notification",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "receiverEmail": {
+      "type": "email"
+    },
+    "receiverName": {
+      "type": "string"
+    },
+    "message": {
+      "type": "richtext"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "senderEmail": {
+      "type": "email"
+    },
+    "senderName": {
+      "type": "string"
+    },
+    "time": {
+      "type": "time"
+    }
+  }
+}
