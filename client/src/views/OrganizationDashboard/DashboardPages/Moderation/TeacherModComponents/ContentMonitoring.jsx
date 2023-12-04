@@ -7,30 +7,6 @@ import {
 } from '../../../../../Utils/requests';
 import '../TeacherModComponents/ContentMonitoring.css';
 
-const initialFlaggedContent = [
-  {
-    id: 1,
-    content: 'Flagged post 1',
-    reason: 'Inappropriate Language',
-  },
-  { id: 2, content: 'Flagged post 2', reason: 'Bullying' },
-  {
-    id: 3,
-    content: 'Flagged post 3',
-    reason: 'Inappropriate Language',
-  },
-  {
-    id: 4,
-    content: 'Flagged post 4',
-    reason: 'Inappropriate Language',
-  },
-  {
-    id: 5,
-    content: 'Flagged post 5',
-    reason: 'Inappropriate Language',
-  },
-];
-
 const ContentMonitoring = () => {
   const [flaggedContent, setFlaggedContent] = useState([]);
   const [actionHistory, setActionHistory] = useState([]);
@@ -39,9 +15,9 @@ const ContentMonitoring = () => {
     const fetchFlaggedContent = async () => {
       try {
         const response = await getFlaggedContent();
-        // Accessing the data array from the response
         if (response && response.data) {
           setFlaggedContent(response.data);
+          console.log(response.data);
         }
       } catch (error) {
         console.error(error);
@@ -54,14 +30,17 @@ const ContentMonitoring = () => {
   const handleApprove = async (contentId) => {
     try {
       await approveFlaggedContent(contentId);
+      const content = flaggedContent.find((item) => item.id === contentId);
       const updatedFlaggedContent = flaggedContent.filter(
         (item) => item.id !== contentId
       );
       setFlaggedContent(updatedFlaggedContent);
-      setActionHistory([
-        ...actionHistory,
-        { id: contentId, action: 'Approved' },
-      ]);
+      if (content) {
+        setActionHistory([
+          ...actionHistory,
+          { ...content, action: 'Approved' },
+        ]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -70,16 +49,26 @@ const ContentMonitoring = () => {
   const handleReject = async (contentId) => {
     try {
       await rejectFlaggedContent(contentId);
+      const content = flaggedContent.find((item) => item.id === contentId);
       const updatedFlaggedContent = flaggedContent.filter(
         (item) => item.id !== contentId
       );
       setFlaggedContent(updatedFlaggedContent);
-      setActionHistory([
-        ...actionHistory,
-        { id: contentId, action: 'Rejected' },
-      ]);
+      if (content) {
+        setActionHistory([
+          ...actionHistory,
+          { ...content, action: 'Rejected' },
+        ]);
+      }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const toggleAccordion = (index) => {
+    const element = document.getElementById(`accordion-${index}`);
+    if (element) {
+      element.classList.toggle('open');
     }
   };
 
@@ -91,20 +80,40 @@ const ContentMonitoring = () => {
           {flaggedContent.map((content) => (
             <li key={content.id} className="flagged-content-item">
               <div className="content-details">
-                Reason: {content.reason} - Date Flagged: {content.date_flagged}
+                <p>
+                  <strong>Reason:</strong> {content.reason}
+                </p>
+                <p>
+                  <strong>Reported by:</strong>{' '}
+                  {content.users_permissions_user.username}
+                </p>
+                <p>
+                  <strong>Date Flagged:</strong>{' '}
+                  {new Date(content.date_flagged).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Activity Description:</strong>{' '}
+                  {content.activity.description}
+                </p>
+                <p>
+                  <strong>Admin Review:</strong>{' '}
+                  {content.admin_permissions_user.username}
+                </p>
               </div>
-              <button
-                onClick={() => handleApprove(content.id)}
-                className="action-button approve-button"
-              >
-                Approve
-              </button>
-              <button
-                onClick={() => handleReject(content.id)}
-                className="action-button reject-button"
-              >
-                Reject
-              </button>
+              <div className="content-actions">
+                <button
+                  onClick={() => handleApprove(content.id)}
+                  className="action-button approve-button"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => handleReject(content.id)}
+                  className="action-button reject-button"
+                >
+                  Reject
+                </button>
+              </div>
             </li>
           ))}
         </ul>
@@ -118,14 +127,40 @@ const ContentMonitoring = () => {
           <ul className="action-history-list">
             {actionHistory.map((item, index) => (
               <li key={index} className="action-history-item">
-                {item.content} - Decision:{' '}
-                <span
-                  className={`decision ${
-                    item.action === 'Rejected' ? 'rejected' : ''
-                  }`}
+                <button
+                  className="accordion-toggle"
+                  onClick={() => toggleAccordion(index)}
                 >
-                  {item.action}
-                </span>
+                  {item.content} - Decision:
+                  <span
+                    className={`decision ${
+                      item.action === 'Rejected' ? 'rejected' : ''
+                    }`}
+                  >
+                    {item.action}
+                  </span>
+                </button>
+                <div className="accordion-content" id={`accordion-${index}`}>
+                  <p>
+                    <strong>Reason:</strong> {item.reason}
+                  </p>
+                  <p>
+                    <strong>Reported by:</strong>{' '}
+                    {item.users_permissions_user.username}
+                  </p>
+                  <p>
+                    <strong>Date Flagged:</strong>{' '}
+                    {new Date(item.date_flagged).toLocaleString()}
+                  </p>
+                  <p>
+                    <strong>Activity Description:</strong>{' '}
+                    {item.activity.description}
+                  </p>
+                  <p>
+                    <strong>Admin Review:</strong>{' '}
+                    {item.admin_permissions_user.username}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
