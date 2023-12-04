@@ -47,6 +47,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/flagged-contents/:id/approve",
+      "handler": "flagged-content.approve",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/flagged-contents/:id/reject",
+      "handler": "flagged-content.reject",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

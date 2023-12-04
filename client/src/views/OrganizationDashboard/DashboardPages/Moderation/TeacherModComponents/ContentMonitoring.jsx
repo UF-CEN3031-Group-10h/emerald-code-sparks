@@ -7,6 +7,8 @@ import {
 } from '../../../../../Utils/requests';
 import '../TeacherModComponents/ContentMonitoring.css';
 
+import { message } from 'antd';
+
 const ContentMonitoring = () => {
   const [flaggedContent, setFlaggedContent] = useState([]);
   const [actionHistory, setActionHistory] = useState([]);
@@ -29,39 +31,53 @@ const ContentMonitoring = () => {
 
   const handleApprove = async (contentId) => {
     try {
-      await approveFlaggedContent(contentId);
-      const content = flaggedContent.find((item) => item.id === contentId);
-      const updatedFlaggedContent = flaggedContent.filter(
-        (item) => item.id !== contentId
-      );
-      setFlaggedContent(updatedFlaggedContent);
-      if (content) {
+      const response = await approveFlaggedContent(contentId);
+      if (response && response.data) {
+        const updatedFlaggedContent = flaggedContent.map((content) =>
+          content.id === contentId
+            ? { ...content, status: 'approved' }
+            : content
+        );
+        setFlaggedContent(updatedFlaggedContent);
+
         setActionHistory([
           ...actionHistory,
-          { ...content, action: 'Approved' },
+          { id: contentId, action: 'Approved' },
         ]);
+
+        message.success('Report Approved successfully!');
+      } else {
+        message.error('Failed to approve content: No data received.');
       }
     } catch (error) {
-      console.error(error);
+      message.error('Failed to approve content');
+      console.error('Error approving content:', error);
     }
   };
 
   const handleReject = async (contentId) => {
     try {
-      await rejectFlaggedContent(contentId);
-      const content = flaggedContent.find((item) => item.id === contentId);
-      const updatedFlaggedContent = flaggedContent.filter(
-        (item) => item.id !== contentId
-      );
-      setFlaggedContent(updatedFlaggedContent);
-      if (content) {
+      const response = await rejectFlaggedContent(contentId);
+      if (response && response.data) {
+        const updatedFlaggedContent = flaggedContent.map((content) =>
+          content.id === contentId
+            ? { ...content, status: 'rejected' }
+            : content
+        );
+        setFlaggedContent(updatedFlaggedContent);
+
         setActionHistory([
           ...actionHistory,
-          { ...content, action: 'Rejected' },
+          { id: contentId, action: 'Rejected' },
         ]);
+
+        message.success('Report Rejected successfully!');
+      } else {
+        message.error('Failed to reject content: No data received.');
       }
     } catch (error) {
-      console.error(error);
+      message.error('Failed to reject content');
+      console.error('Error rejecting content:', error);
     }
   };
 
@@ -81,11 +97,11 @@ const ContentMonitoring = () => {
             <li key={content.id} className="flagged-content-item">
               <div className="content-details">
                 <p>
-                  <strong>Reason:</strong> {content.reason}
+                  <strong>Reason:</strong> {content?.reason || 'N/A'}
                 </p>
                 <p>
                   <strong>Reported by:</strong>{' '}
-                  {content.users_permissions_user.username}
+                  {content.users_permissions_user?.username || 'N/A'}
                 </p>
                 <p>
                   <strong>Date Flagged:</strong>{' '}
@@ -93,11 +109,11 @@ const ContentMonitoring = () => {
                 </p>
                 <p>
                   <strong>Activity Description:</strong>{' '}
-                  {content.activity.description}
+                  {content.activity?.description || 'N/A'}
                 </p>
                 <p>
                   <strong>Admin Review:</strong>{' '}
-                  {content.admin_permissions_user.username}
+                  {content.admin_permissions_user?.username || 'N/A'}
                 </p>
               </div>
               <div className="content-actions">
@@ -131,7 +147,7 @@ const ContentMonitoring = () => {
                   className="accordion-toggle"
                   onClick={() => toggleAccordion(index)}
                 >
-                  {item.content} - Decision:
+                  {item.content} - Decision:{' '}
                   <span
                     className={`decision ${
                       item.action === 'Rejected' ? 'rejected' : ''
@@ -142,11 +158,11 @@ const ContentMonitoring = () => {
                 </button>
                 <div className="accordion-content" id={`accordion-${index}`}>
                   <p>
-                    <strong>Reason:</strong> {item.reason}
+                    <strong>Reason: </strong> {item?.reason || 'N/A'}
                   </p>
                   <p>
                     <strong>Reported by:</strong>{' '}
-                    {item.users_permissions_user.username}
+                    {item.users_permissions_user?.username || 'N/A'}
                   </p>
                   <p>
                     <strong>Date Flagged:</strong>{' '}
@@ -154,11 +170,11 @@ const ContentMonitoring = () => {
                   </p>
                   <p>
                     <strong>Activity Description:</strong>{' '}
-                    {item.activity.description}
+                    {item.activity?.description || 'N/A'}
                   </p>
                   <p>
                     <strong>Admin Review:</strong>{' '}
-                    {item.admin_permissions_user.username}
+                    {item.admin_permissions_user?.username || 'N/A'}
                   </p>
                 </div>
               </li>

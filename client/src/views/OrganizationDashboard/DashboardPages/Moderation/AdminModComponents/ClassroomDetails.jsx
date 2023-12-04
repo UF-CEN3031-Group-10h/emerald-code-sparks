@@ -18,7 +18,6 @@ const ClassroomDetails = () => {
         const { data, err } = await getAllClassrooms();
         if (err) throw new Error(err);
         setClassrooms(data);
-        console.log('Classrooms:', data);
       } catch (error) {
         console.error('Error fetching classrooms:', error);
       } finally {
@@ -72,17 +71,12 @@ const ClassroomDetails = () => {
             <h3>{classroom.name}</h3>
             <p>{classroom.description}</p>
             <div className="teacher-text">
-              Teachers:{' '}
-              {classroom.mentors
-                ?.map((mentor) => `${mentor.first_name} ${mentor.last_name}`)
-                .join(', ')}
+              Teachers: {classroom.teachers?.join(', ')}
             </div>
             <Collapse accordion className="classroom-students-collapse">
               <Panel header="Students: Click to view" key={classroom.id}>
                 {classroom.students?.map((student, index) => (
-                  <p key={index}>
-                    {student.name} {student.character}
-                  </p>
+                  <p key={index}>{student.name}</p>
                 ))}
               </Panel>
             </Collapse>

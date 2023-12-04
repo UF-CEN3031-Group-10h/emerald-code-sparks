@@ -12,6 +12,7 @@ import OrganizationUsers from './DashboardPages/Users';
 import OrganizationModeration from './DashboardPages/Moderation/Moderation';
 import OrganizationClasses from './DashboardPages/Classes';
 import { useSearchParams } from 'react-router-dom';
+import GalleryPage from './DashboardPages/Gallery';
 
 const { TabPane } = Tabs;
 
@@ -37,6 +38,7 @@ export default function OrganizationDashboard() {
     Users: ['/users', <OrganizationUsers />],
     Moderation: ['/moderation', <OrganizationModeration />],
     Classrooms: ['/classes', <OrganizationClasses />],
+    Gallery: ['/gallery', <GalleryPage />],
   };
   if (value.org === undefined) {
     return NonOrgMember();
@@ -64,6 +66,9 @@ export default function OrganizationDashboard() {
         </TabPane>
         <TabPane tab="Classrooms" key="classroom">
           <OrganizationClasses />
+        </TabPane>
+        <TabPane tab="Gallery" key="gallery">
+          <GalleryPage />
         </TabPane>
       </Tabs>
     </div>

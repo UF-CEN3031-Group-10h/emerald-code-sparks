@@ -736,17 +736,27 @@ export const getFlaggedContent = async () =>
 // approve flaged content item
 export const approveFlaggedContent = async (contentId) =>
   makeRequest({
-    method: PUT,
+    method: 'POST',
     path: `${server}/flagged-contents/${contentId}/approve`,
     auth: true,
     error: 'Failed to approve flagged content.',
   });
 
-// reject flagged content item
+// reject flaged content item
 export const rejectFlaggedContent = async (contentId) =>
   makeRequest({
-    method: PUT,
+    method: 'POST',
     path: `${server}/flagged-contents/${contentId}/reject`,
     auth: true,
     error: 'Failed to reject flagged content.',
+  });
+
+// report new flagged content
+export const reportFlaggedContent = async (flaggedData) =>
+  makeRequest({
+    method: 'POST',
+    path: `${server}/flagged-contents`,
+    data: flaggedData,
+    auth: true,
+    error: 'Failed to report flagged content.',
   });
