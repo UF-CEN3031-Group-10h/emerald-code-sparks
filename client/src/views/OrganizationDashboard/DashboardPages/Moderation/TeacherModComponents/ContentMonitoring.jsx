@@ -1,5 +1,10 @@
 // ContentMonitoring.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  getFlaggedContent,
+  approveFlaggedContent,
+  rejectFlaggedContent,
+} from '../../../../../Utils/requests';
 import '../TeacherModComponents/ContentMonitoring.css';
 
 const initialFlaggedContent = [
@@ -27,19 +32,55 @@ const initialFlaggedContent = [
 ];
 
 const ContentMonitoring = () => {
-  const [flaggedContent, setFlaggedContent] = useState(initialFlaggedContent);
+  const [flaggedContent, setFlaggedContent] = useState([]);
   const [actionHistory, setActionHistory] = useState([]);
 
-  const handleApprove = (contentId) => {
-    const content = flaggedContent.find((item) => item.id === contentId);
-    setFlaggedContent(flaggedContent.filter((item) => item.id !== contentId));
-    setActionHistory([...actionHistory, { ...content, action: 'Approved' }]);
+  useEffect(() => {
+    const fetchFlaggedContent = async () => {
+      try {
+        const response = await getFlaggedContent();
+        // Accessing the data array from the response
+        if (response && response.data) {
+          setFlaggedContent(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchFlaggedContent();
+  }, []);
+
+  const handleApprove = async (contentId) => {
+    try {
+      await approveFlaggedContent(contentId);
+      const updatedFlaggedContent = flaggedContent.filter(
+        (item) => item.id !== contentId
+      );
+      setFlaggedContent(updatedFlaggedContent);
+      setActionHistory([
+        ...actionHistory,
+        { id: contentId, action: 'Approved' },
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleReject = (contentId) => {
-    const content = flaggedContent.find((item) => item.id === contentId);
-    setFlaggedContent(flaggedContent.filter((item) => item.id !== contentId));
-    setActionHistory([...actionHistory, { ...content, action: 'Rejected' }]);
+  const handleReject = async (contentId) => {
+    try {
+      await rejectFlaggedContent(contentId);
+      const updatedFlaggedContent = flaggedContent.filter(
+        (item) => item.id !== contentId
+      );
+      setFlaggedContent(updatedFlaggedContent);
+      setActionHistory([
+        ...actionHistory,
+        { id: contentId, action: 'Rejected' },
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -50,7 +91,7 @@ const ContentMonitoring = () => {
           {flaggedContent.map((content) => (
             <li key={content.id} className="flagged-content-item">
               <div className="content-details">
-                {content.content} - Reason: {content.reason}
+                Reason: {content.reason} - Date Flagged: {content.date_flagged}
               </div>
               <button
                 onClick={() => handleApprove(content.id)}

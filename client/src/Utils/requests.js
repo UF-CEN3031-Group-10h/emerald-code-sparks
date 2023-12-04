@@ -44,34 +44,34 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   return { data: res, err: err };
 };
 export const getAllOrgs = async () =>
-    makeRequest({
-        method: GET,
-        path: `${server}/organizations`,
-        auth: true,
-        error: 'Faild to get list of orgs'
-    });
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations`,
+    auth: true,
+    error: 'Faild to get list of orgs',
+  });
 export const getOrgClasses = async (id) =>
-        makeRequest({
-            method: GET,
-            path: `${server}/organizations/${id}/classes`,
-            auth: true,
-            error: 'Faild to get list of org classes'
-        });
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations/${id}/classes`,
+    auth: true,
+    error: 'Faild to get list of org classes',
+  });
 
 export const getOrgUsers = async (id) =>
   makeRequest({
     method: GET,
     path: `${server}/organizations/${id}/users`,
     auth: true,
-    error: 'Organization users could not be retrieved.'
-  })
+    error: 'Organization users could not be retrieved.',
+  });
 export const getOrgMentors = async (id) =>
-    makeRequest({
-        method: GET,
-        path: `${server}/organizations/${id}/mentors`,
-        auth: true,
-        error: 'Organization mentors could not be retrieved.'
-    })
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations/${id}/mentors`,
+    auth: true,
+    error: 'Organization mentors could not be retrieved.',
+  });
 export const getActivities = async () =>
   makeRequest({
     method: GET,
@@ -421,7 +421,13 @@ export const createLessonModule = async (
     error: 'Login failed.',
   });
 
-export const createUnit = async (number, name, standardsID, standardsDescrip, grade) =>
+export const createUnit = async (
+  number,
+  name,
+  standardsID,
+  standardsDescrip,
+  grade
+) =>
   makeRequest({
     method: POST,
     path: `${server}/units`,
@@ -532,7 +538,7 @@ export const getLessonModuleActivities = async (lsId) =>
     error: 'Activity cannot be retrived',
   });
 
-  export const getActivityLevels = async (lsId) =>
+export const getActivityLevels = async (lsId) =>
   makeRequest({
     method: GET,
     path: `${server}/authorized-workspaces?activities.id=${lsId}`,
@@ -701,19 +707,46 @@ export const getClassroomWorkspace = async (id) =>
     error: 'Unable to retrive classroom workspaces',
   });
 export const deleteClassroom = async (id) =>
-    makeRequest({
-        method: DELETE,
-        path: `${server}/classroom/${id}`,
-        auth: true,
-        error: 'Unable to remove classroom',
-    });
+  makeRequest({
+    method: DELETE,
+    path: `${server}/classroom/${id}`,
+    auth: true,
+    error: 'Unable to remove classroom',
+  });
 export const createClassroom = async (id, title) =>
-    makeRequest({
-        method: POST,
-        path: `${server}/classroom`,
-        auth: true,
-        data: {
-            name: title
-        },
-        error: 'Unable to create new classroom',
-    });
+  makeRequest({
+    method: POST,
+    path: `${server}/classroom`,
+    auth: true,
+    data: {
+      name: title,
+    },
+    error: 'Unable to create new classroom',
+  });
+
+// get all flagged content
+export const getFlaggedContent = async () =>
+  makeRequest({
+    method: 'GET',
+    path: `${server}/flagged-contents`,
+    auth: true,
+    error: 'Failed to retrieve flagged content.',
+  });
+
+// approve flaged content item
+export const approveFlaggedContent = async (contentId) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/flagged-contents/${contentId}/approve`,
+    auth: true,
+    error: 'Failed to approve flagged content.',
+  });
+
+// reject flagged content item
+export const rejectFlaggedContent = async (contentId) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/flagged-contents/${contentId}/reject`,
+    auth: true,
+    error: 'Failed to reject flagged content.',
+  });
