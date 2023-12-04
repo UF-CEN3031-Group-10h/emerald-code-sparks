@@ -723,3 +723,30 @@ export const createClassroom = async (id, title) =>
     },
     error: 'Unable to create new classroom',
   });
+
+// get all flagged content
+export const getFlaggedContent = async () =>
+  makeRequest({
+    method: 'GET',
+    path: `${server}/flagged-contents`,
+    auth: true,
+    error: 'Failed to retrieve flagged content.',
+  });
+
+// approve flaged content item
+export const approveFlaggedContent = async (contentId) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/flagged-contents/${contentId}/approve`,
+    auth: true,
+    error: 'Failed to approve flagged content.',
+  });
+
+// reject flagged content item
+export const rejectFlaggedContent = async (contentId) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/flagged-contents/${contentId}/reject`,
+    auth: true,
+    error: 'Failed to reject flagged content.',
+  });
