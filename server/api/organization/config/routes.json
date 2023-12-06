@@ -18,6 +18,16 @@
     },
     {
       "method": "GET",
+      "path": "/organizations/personal",
+      "handler": "organization.getlocal",
+      "config": {
+        "policies": [
+          "global::isOrgMember2"
+        ]
+      }
+    },
+    {
+      "method": "GET",
       "path": "/organizations/:id",
       "handler": "organization.findOne",
       "config": {
@@ -39,7 +49,9 @@
       "path": "/organizations",
       "handler": "organization.create",
       "config": {
-        "policies": []
+        "policies": [
+          "global::isNotOrgMember"
+        ]
       }
     },
     {
@@ -55,7 +67,9 @@
       "path": "/organizations/:id",
       "handler": "organization.delete",
       "config": {
-        "policies": []
+        "policies": [
+          "global::isOrgOwner"
+        ]
       }
     }
   ]
