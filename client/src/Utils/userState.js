@@ -46,7 +46,19 @@ export const getCurrUser = () => {
     obj.email = result.role.email;
   }
   if (!(result.organization === null)) {
-    obj.org = result.organization.Name;
+    try
+    {obj.org = Object()
+    obj.org.Name = result.organization.Name;
+    obj.org.id = result.organization.id
+    obj.org.IsAdmin = result.organization.admins.map((admin) => { return admin.id }).includes(result.id)
+      obj.org.IsOwner = result.organization.owner.id === result.id
+    }
+    catch (error)
+    {
+      console.log(error)
+      console.log(result.organization)
+      obj.org = "ERROR"
+    }
   }
   return obj;
 };

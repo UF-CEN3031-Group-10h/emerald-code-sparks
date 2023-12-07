@@ -50,6 +50,31 @@ export const getAllOrgs = async () =>
     auth: true,
     error: 'Faild to get list of orgs',
   });
+export const getLocalOrg = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/organizations/personal`,
+    auth: true,
+    error: 'Faild to users org',
+  });
+export const createOrg = async (name) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/organizations`,
+    auth: true,
+    data: {
+      name: name,
+    },
+    error: 'Failed to create organization'
+  });
+
+export const deleteOrganization = async (id) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/organizations/${id}`,
+    auth: true,
+    error: "Failed to delete organization"
+  });
 export const getOrgClasses = async (id) =>
   makeRequest({
     method: GET,

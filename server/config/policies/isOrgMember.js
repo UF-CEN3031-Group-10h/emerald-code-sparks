@@ -2,7 +2,7 @@
 // Check if the current user is a member of a specific org
 //
 module.exports = async (ctx, next) => {
-
+    console.log("Is org member");
     const requestedId = parseInt(ctx.params.id);
     console.log(typeof (requestedId));
     console.log(requestedId);
