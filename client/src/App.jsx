@@ -23,7 +23,6 @@ import OrganizationLogin from './views/OrganizationLogin/OrganizationLogin';
 import OrganizationDashboard from './views/OrganizationDashboard/OrganizationDashboard';
 import AdminLogin from './views/AdminLogin/AdminLogin';
 import AdminDashboard from './views/AdminDashboard/AdminDashboard';
-import CreateOrgnaization from './views/OrganizationCreate/CreateOrganization';
 
 const App = () => {
   return (
@@ -39,7 +38,6 @@ const App = () => {
         <Route path="/replay/:saveID" element={<Replay />} />
         <Route path="/sandbox" element={<BlocklyPage isSandbox={true} />} />
         <Route path="/organizationlogin" element={<OrganizationLogin />} />
-        <Route path="/createorganization" element={<CreateOrgnaization />} />
 
         <Route
           path="/organizationdashboard"

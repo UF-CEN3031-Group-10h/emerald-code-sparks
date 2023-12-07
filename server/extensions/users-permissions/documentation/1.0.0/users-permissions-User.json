@@ -1281,15 +1281,6 @@
                   "type": "string"
                 }
               },
-              "admins": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "owner": {
-                "type": "string"
-              },
               "published_at": {
                 "type": "string"
               },

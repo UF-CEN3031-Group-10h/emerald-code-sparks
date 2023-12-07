@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
-import { getCurrUser, useGlobalState } from '../../Utils/userState';
+import { useGlobalState } from '../../Utils/userState';
 import NonOrgMember from './OrganizationNonMember';
 import './OrganizationDashboard.less';
 import OrganizationDashSideBar from './OrgDashboardSidebar';
@@ -13,7 +13,6 @@ import OrganizationModeration from './DashboardPages/Moderation/Moderation';
 import OrganizationClasses from './DashboardPages/Classes';
 import { useSearchParams } from 'react-router-dom';
 import GalleryPage from './DashboardPages/Gallery';
-import ManageOrganization from './DashboardPages/Manage';
 
 const { TabPane } = Tabs;
 
@@ -40,7 +39,6 @@ export default function OrganizationDashboard() {
     Moderation: ['/moderation', <OrganizationModeration />],
     Classrooms: ['/classes', <OrganizationClasses />],
     Gallery: ['/gallery', <GalleryPage />],
-    Manage: ['/manage', <ManageOrganization />]
   };
   if (value.org === undefined) {
     return NonOrgMember();
@@ -72,12 +70,6 @@ export default function OrganizationDashboard() {
         <TabPane tab="Gallery" key="gallery">
           <GalleryPage />
         </TabPane>
-        {getCurrUser().org.IsAdmin ?
-          <TabPane tab="Manage" key="manage">
-            <ManageOrganization />
-          </TabPane>
-          : <></>
-        }
       </Tabs>
     </div>
   );
