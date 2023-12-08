@@ -29,55 +29,84 @@ const ContentMonitoring = () => {
     fetchFlaggedContent();
   }, []);
 
-  const handleApprove = async (contentId) => {
-    try {
-      const response = await approveFlaggedContent(contentId);
-      if (response && response.data) {
-        const updatedFlaggedContent = flaggedContent.map((content) =>
-          content.id === contentId
-            ? { ...content, status: 'approved' }
-            : content
-        );
-        setFlaggedContent(updatedFlaggedContent);
+  // const handleApprove = async (contentId) => {
+  //   try {
+  //     const response = await approveFlaggedContent(contentId);
+  //     if (response && response.data) {
+  //       const updatedFlaggedContent = flaggedContent.map((content) =>
+  //         content.id === contentId
+  //           ? { ...content, status: 'approved' }
+  //           : content
+  //       );
+  //       setFlaggedContent(updatedFlaggedContent);
 
-        setActionHistory([
-          ...actionHistory,
-          { id: contentId, action: 'Approved' },
+  //       setActionHistory([
+  //         ...actionHistory,
+  //         { id: contentId, action: 'Approved' },
+  //       ]);
+
+  //       message.success('Report Approved successfully!');
+  //     } else {
+  //       message.error('Failed to approve content: No data received.');
+  //     }
+  //   } catch (error) {
+  //     message.error('Failed to approve content');
+  //     console.error('Error approving content:', error);
+  //   }
+  // };
+
+  // const handleReject = async (contentId) => {
+  //   try {
+  //     const response = await rejectFlaggedContent(contentId);
+  //     if (response && response.data) {
+  //       const updatedFlaggedContent = flaggedContent.map((content) =>
+  //         content.id === contentId
+  //           ? { ...content, status: 'rejected' }
+  //           : content
+  //       );
+  //       setFlaggedContent(updatedFlaggedContent);
+
+  //       setActionHistory([
+  //         ...actionHistory,
+  //         { id: contentId, action: 'Rejected' },
+  //       ]);
+
+  //       message.success('Report Rejected successfully!');
+  //     } else {
+  //       message.error('Failed to reject content: No data received.');
+  //     }
+  //   } catch (error) {
+  //     message.error('Failed to reject content');
+  //     console.error('Error rejecting content:', error);
+  //   }
+  // };
+
+  const handleAction = async (content, actionType) => {
+    try {
+      const response =
+        actionType === 'Approved'
+          ? await approveFlaggedContent(content.id)
+          : await rejectFlaggedContent(content.id);
+
+      if (response && response.data) {
+        setFlaggedContent((prevContent) =>
+          prevContent.filter((item) => item.id !== content.id)
+        );
+
+        setActionHistory((prevHistory) => [
+          ...prevHistory,
+          { ...content, action: actionType },
         ]);
 
-        message.success('Report Approved successfully!');
+        message.success(`Report ${actionType} successfully!`);
       } else {
-        message.error('Failed to approve content: No data received.');
-      }
-    } catch (error) {
-      message.error('Failed to approve content');
-      console.error('Error approving content:', error);
-    }
-  };
-
-  const handleReject = async (contentId) => {
-    try {
-      const response = await rejectFlaggedContent(contentId);
-      if (response && response.data) {
-        const updatedFlaggedContent = flaggedContent.map((content) =>
-          content.id === contentId
-            ? { ...content, status: 'rejected' }
-            : content
+        message.error(
+          `Failed to ${actionType.toLowerCase()} content: No data received.`
         );
-        setFlaggedContent(updatedFlaggedContent);
-
-        setActionHistory([
-          ...actionHistory,
-          { id: contentId, action: 'Rejected' },
-        ]);
-
-        message.success('Report Rejected successfully!');
-      } else {
-        message.error('Failed to reject content: No data received.');
       }
     } catch (error) {
-      message.error('Failed to reject content');
-      console.error('Error rejecting content:', error);
+      message.error(`Failed to ${actionType.toLowerCase()} content`);
+      console.error(`Error ${actionType.toLowerCase()} content:`, error);
     }
   };
 
@@ -118,13 +147,13 @@ const ContentMonitoring = () => {
               </div>
               <div className="content-actions">
                 <button
-                  onClick={() => handleApprove(content.id)}
+                  onClick={() => handleAction(content, 'Approved')}
                   className="action-button approve-button"
                 >
                   Approve
                 </button>
                 <button
-                  onClick={() => handleReject(content.id)}
+                  onClick={() => handleAction(content, 'Rejected')}
                   className="action-button reject-button"
                 >
                   Reject
