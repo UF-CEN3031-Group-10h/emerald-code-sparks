@@ -31,7 +31,7 @@ export default function OrganizationHome() {
   }
   return (
     <>
-      <div id="main-header">Welcome to {org.Name}</div>
+      <div id="main-header2">Welcome to {org.Name}</div>
       {/* <p>{sessionStorage.getItem("user")}</p>
     {orgs.map((organization) => (
       <div key={organization.id} id='dashboard-class-card'>
