@@ -1,38 +1,55 @@
-// StudentWorkOversight.jsx
 import React, { useState } from 'react';
-import '../TeacherModComponents/StudentWorkOversight.css';
+import './StudentWorkOversight.css'; // Update the path if needed
 
-// dummy data  for student work
 const initialStudentWork = [
   {
     id: 1,
     studentName: 'Student 1',
     assignment: 'Essay on Environment',
     status: 'Pending Review',
+    feedback: '',
   },
   {
     id: 2,
     studentName: 'Student 2',
     assignment: 'Math Homework',
-    status: 'Reviewed',
+    status: 'Pending Review',
+    feedback: '',
   },
 ];
 
 const StudentWorkOversight = () => {
   const [studentWork, setStudentWork] = useState(initialStudentWork);
 
-  // function to handle reviewing student work (still in progress)
   const handleReview = (workId) => {
     const updatedWork = studentWork.map((work) =>
-      work.id === workId ? { ...work, status: 'Reviewed' } : work
+      work.id === workId
+        ? {
+            ...work,
+            status: work.status === 'Pending Review' ? 'Reviewed' : 'Pending Review',
+          }
+        : work
     );
     setStudentWork(updatedWork);
   };
 
-  // function to handle providing feedback on student work (still in progress)
   const handleFeedback = (workId) => {
     const updatedWork = studentWork.map((work) =>
-      work.id === workId ? { ...work, status: 'Feedback Provided' } : work
+      work.id === workId ? { ...work, showInput: true } : work
+    );
+    setStudentWork(updatedWork);
+  };
+
+  const handleInputChange = (workId, e) => {
+    const updatedWork = studentWork.map((work) =>
+      work.id === workId ? { ...work, feedback: e.target.value } : work
+    );
+    setStudentWork(updatedWork);
+  };
+
+  const handleSaveFeedback = (workId) => {
+    const updatedWork = studentWork.map((work) =>
+      work.id === workId ? { ...work, status: 'Feedback Provided', showInput: false } : work
     );
     setStudentWork(updatedWork);
   };
@@ -43,21 +60,45 @@ const StudentWorkOversight = () => {
       <ul className="student-work-list">
         {studentWork.map((work) => (
           <li key={work.id} className="student-work-item">
-            <div className="work-details">
-              {work.studentName} - {work.assignment} - Status: {work.status}
+            <div>
+              {work.studentName} - {work.assignment} - 
+              <span className={
+                work.status === 'Pending Review' ? 'pending-review' :
+                work.status === 'Reviewed' ? 'reviewed' :
+                work.status === 'Feedback Provided' ? 'feedback-provided' : ''
+              }>
+                Status: {work.status}
+              </span>
             </div>
             <button
               onClick={() => handleReview(work.id)}
               className="action-button review-button"
             >
-              Review
+              {work.status === 'Pending Review' ? 'Review' : 'Undo'}
             </button>
-            <button
-              onClick={() => handleFeedback(work.id)}
-              className="action-button feedback-button"
-            >
-              Provide Feedback
-            </button>
+            {!work.showInput ? (
+              <button
+                onClick={() => handleFeedback(work.id)}
+                className="action-button feedback-button"
+              >
+                Provide Feedback
+              </button>
+            ) : (
+              <div>
+                <textarea
+                  placeholder="Enter your feedback"
+                  value={work.feedback}
+                  onChange={(e) => handleInputChange(work.id, e)}
+                />
+                <button
+                  onClick={() => handleSaveFeedback(work.id)}
+                  className="action-button feedback-button"
+                >
+                  Save Feedback
+                </button>
+              </div>
+            )}
+            {work.feedback && <p>Your feedback: {work.feedback}</p>}
           </li>
         ))}
       </ul>

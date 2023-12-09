@@ -30,8 +30,19 @@
   justify-content: space-between;
 }
 
-.work-details {
-  margin-right: 10px;
+.pending-review {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.reviewed {
+  color:rgb(22, 190, 7);
+  font-weight: bold;
+}
+
+.feedback-provided {
+  color: blue;
+  font-weight: bold;
 }
 
 .student-work-container .action-button {
