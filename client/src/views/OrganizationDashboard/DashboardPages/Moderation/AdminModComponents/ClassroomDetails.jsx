@@ -71,7 +71,11 @@ const ClassroomDetails = () => {
             <h3>{classroom.name}</h3>
             <p>{classroom.description}</p>
             <div className="teacher-text">
-              Teachers: {classroom.teachers?.join(', ')}
+              Teachers:{' '}
+              {classroom.mentors?.map(
+                (mentor) => mentor.first_name + ' ' + mentor.last_name + ', '
+              )}
+              {/* {console.log(classroom.mentors)} */}
             </div>
             <Collapse accordion className="classroom-students-collapse">
               <Panel header="Students: Click to view" key={classroom.id}>
