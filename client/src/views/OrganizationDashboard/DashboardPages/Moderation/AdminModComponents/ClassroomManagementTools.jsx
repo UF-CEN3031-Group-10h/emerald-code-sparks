@@ -1,62 +1,79 @@
 import React, { useState, useEffect } from 'react';
+import { List, Button, Card, Modal, message } from 'antd';
 import ClassroomForm from './ClassroomForm';
-import './ClassroomManagementTools.css';
 import { getAllClassrooms } from '../../../../../Utils/requests';
+import './ClassroomManagementTools.css';
 
 const ClassroomManagementTools = () => {
   const [classrooms, setClassrooms] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchClassrooms = async () => {
       const { data, error } = await getAllClassrooms();
       if (!error) {
         setClassrooms(data);
-        // console.log('Classrooms:', data);
       } else {
         console.error('Failed to fetch classrooms:', error);
-        prompt('Failed to fetch classrooms:', error);
+        message.error('Failed to create classroom');
       }
     };
 
     fetchClassrooms();
   }, []);
+
   const handleCreateClassroom = async (classroom) => {
-    // for later api request to create classroom
     setClassrooms([...classrooms, { ...classroom, id: Date.now() }]);
+    message.success('Classroom created successfully');
+    setIsModalVisible(false);
   };
 
   const handleDeleteClassroom = async (classroomId) => {
-    // for later api request to delete classroom
     setClassrooms(
       classrooms.filter((classroom) => classroom.id !== classroomId)
     );
+    message.success('Classroom deleted successfully');
   };
 
   return (
     <div className="classroom-management">
-      <div className="category-title">Classroom Management Tools</div>
-      <div className="category-content">
-        <div className="new-classroom">
-          <h3 className="add-classroom-title">Create New Classroom</h3>
-          <ClassroomForm onSubmit={handleCreateClassroom} />
+      <Card
+      // title="Classroom Management Tools"
+      // bordered={false}
+      // className="category-title"
+      >
+        <div className="category-title" style={{ color: '#333' }}>
+          Classroom Management Tools
         </div>
-        <div className="new-classroom">
-          <h3 className="add-classroom-title">Existing Classrooms:</h3>
-          <ul>
-            {classrooms.map((classroom) => (
-              <li key={classroom.id}>
-                {classroom.name}
-                <button
-                  className="classroom-delete-btn"
+        <Button type="primary" onClick={() => setIsModalVisible(true)}>
+          Create New Classroom
+        </Button>
+        <Modal
+          title="New Classroom"
+          visible={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          footer={null}
+        >
+          <ClassroomForm onSubmit={handleCreateClassroom} />
+        </Modal>
+        <List
+          dataSource={classrooms}
+          renderItem={(classroom) => (
+            <List.Item
+              actions={[
+                <Button
+                  type="danger"
                   onClick={() => handleDeleteClassroom(classroom.id)}
                 >
-                  X
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+                  Delete
+                </Button>,
+              ]}
+            >
+              {classroom.name}
+            </List.Item>
+          )}
+        />
+      </Card>
     </div>
   );
 };
