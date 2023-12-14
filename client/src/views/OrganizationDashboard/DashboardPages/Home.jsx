@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { getToken } from '../../../Utils/AuthRequests';
 import { getOrgUsers } from '../../../Utils/requests';
 import { message } from 'antd';
+import './OrganizationHome.css'; 
 
 export default function OrganizationHome() {
   const [org, setOrg] = useState({});
@@ -29,30 +30,16 @@ export default function OrganizationHome() {
   if (!('Name' in org)) {
     return <div id="main-header">Welcome to Loading</div>;
   }
+
   return (
-    <>
+    <div className="organization_home">
       <div id="main-header2">Welcome to {org.Name}</div>
-      {/* <p>{sessionStorage.getItem("user")}</p>
-    {orgs.map((organization) => (
-      <div key={organization.id} id='dashboard-class-card'>
-        <div id='card-left-content-container'>
-          <h1 id='card-title'>{organization.name}</h1>
-          <div id='card-button-container' className='flex flex-row'>
-            <button>
-              View
-            </button>
-          </div>
-        </div>
-        <div id='card-right-content-container'>
-          <DashboardDisplayCodeModal code={organization.code} />
-          <div id='divider' />
-          <div id='student-number-container'>
-            <h1 id='number'>{organization.students.length}</h1>
-            <p id='label'>Students</p>
-          </div>
+      <div className="cat_details">
+        <div className="adjusted_mid">
+          Navigate the taskbar to see more options.
         </div>
       </div>
-    ))} */}
-    </>
+      {/* Additional content can be added here */}
+    </div>
   );
 }

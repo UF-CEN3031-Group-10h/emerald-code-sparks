@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './StudentWorkOversight.css'; // Update the path if needed
 
+// Initial data for student work
 const initialStudentWork = [
   {
     id: 1,
@@ -19,8 +20,10 @@ const initialStudentWork = [
 ];
 
 const StudentWorkOversight = () => {
+  // State to manage student work data
   const [studentWork, setStudentWork] = useState(initialStudentWork);
 
+  // Function to handle toggling between 'Pending Review' and 'Reviewed' statuses
   const handleReview = (workId) => {
     const updatedWork = studentWork.map((work) =>
       work.id === workId
@@ -33,6 +36,7 @@ const StudentWorkOversight = () => {
     setStudentWork(updatedWork);
   };
 
+  // Function to handle displaying feedback input
   const handleFeedback = (workId) => {
     const updatedWork = studentWork.map((work) =>
       work.id === workId ? { ...work, showInput: true } : work
@@ -40,6 +44,7 @@ const StudentWorkOversight = () => {
     setStudentWork(updatedWork);
   };
 
+  // Function to handle input changes for feedback
   const handleInputChange = (workId, e) => {
     const updatedWork = studentWork.map((work) =>
       work.id === workId ? { ...work, feedback: e.target.value } : work
@@ -47,6 +52,7 @@ const StudentWorkOversight = () => {
     setStudentWork(updatedWork);
   };
 
+  // Function to handle saving feedback and changing status to 'Feedback Provided'
   const handleSaveFeedback = (workId) => {
     const updatedWork = studentWork.map((work) =>
       work.id === workId ? { ...work, status: 'Feedback Provided', showInput: false } : work
@@ -58,9 +64,11 @@ const StudentWorkOversight = () => {
     <div className="student-work-container">
       <h2>Student Work</h2>
       <ul className="student-work-list">
+        {/* Loop through student work items */}
         {studentWork.map((work) => (
           <li key={work.id} className="student-work-item">
             <div>
+              {/* Display student work details and status */}
               {work.studentName} - {work.assignment} - 
               <span className={
                 work.status === 'Pending Review' ? 'pending-review' :
@@ -70,12 +78,14 @@ const StudentWorkOversight = () => {
                 Status: {work.status}
               </span>
             </div>
+            {/* Button to handle review or undo action */}
             <button
               onClick={() => handleReview(work.id)}
               className="action-button review-button"
             >
               {work.status === 'Pending Review' ? 'Review' : 'Undo'}
             </button>
+            {/* Button to handle feedback input */}
             {!work.showInput ? (
               <button
                 onClick={() => handleFeedback(work.id)}
@@ -84,6 +94,7 @@ const StudentWorkOversight = () => {
                 Provide Feedback
               </button>
             ) : (
+              // Display input for feedback and button to save feedback
               <div>
                 <textarea
                   placeholder="Enter your feedback"
@@ -98,6 +109,7 @@ const StudentWorkOversight = () => {
                 </button>
               </div>
             )}
+            {/* Display feedback */}
             {work.feedback && <p>Your feedback: {work.feedback}</p>}
           </li>
         ))}
