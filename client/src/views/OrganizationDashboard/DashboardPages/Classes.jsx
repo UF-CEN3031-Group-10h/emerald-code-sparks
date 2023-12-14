@@ -63,7 +63,7 @@ export default function OrganizationClasses() {
         return (
             <div className='container nav-padding'>
                 <NavBar isMentor={true} />
-                <div id='main-header'>Hello {user.username}</div>
+                <div id='main-header2'>Hello {user.username}</div>
                 <MentorSubHeader title={'Your Classrooms'}></MentorSubHeader>
                 <div id='classrooms-container'>
                     <div id='dashboard-card-container'>

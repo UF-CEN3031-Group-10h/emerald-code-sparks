@@ -4,11 +4,13 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  /* width: 30%; */
+  /* color: #000; */
 }
 
 .category-title {
   font-size: 1.5em;
-  color: #333;
+  color: #000;
   margin-bottom: 15px;
   text-align: center;
 }

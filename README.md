@@ -9,6 +9,35 @@ Cloud-based programming interface
 
 <br/>
 
+## Group 10h Features Implemented
+
+### Organizations Created
+
+Organizations now exist in the database as type. They have classes and users.
+Some users within the organization are able to be administrators, and one user is the owner.
+
+
+### Dashboard for Management of Organizations Created
+
+We created a dashboard that allows the owners and administrators of organizations to manage them. 
+
+Currently They are able to add classrooms and teachers, as well as delete the entire organization.
+
+There are placeholder pages for the organization's gallery and moderation tools for when this project is merged with those projects. 
+
+
+In the dashboard, when an administrator attempts to preform an irreversible action, such as deleting the organization, they are warned, and given an opportunity to cancel. 
+<br/>
+
+### Secondary Admin Dashboard
+
+There are a set of pages that haven't been incorporated into the main organization dashboard. They cannot be viewed because of changes we made to the backend. The AdminModeration Page is meant to replace the current moderation tab on the main organization dashboard, it just didn't get done before the end of the project. 
+
+
+### Built Upon
+
+We didn't borrow any code from outside sources, however, we did reference existing functionality within the project when working on implementing our new functionality. 
+
 ## Application
 
 ### `client` 

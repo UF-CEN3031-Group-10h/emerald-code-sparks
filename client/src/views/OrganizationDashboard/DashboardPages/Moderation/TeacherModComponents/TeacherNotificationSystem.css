@@ -27,6 +27,30 @@
   margin-right: 10px;
 }
 
+/* .mark-read-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+} */
+
+/* .mark-read-button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
+} */
+
 .mark-read-button {
   padding: 5px 10px;
   background-color: #007bff;
@@ -36,5 +60,16 @@
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
+  }
+}
+
+.mark-read-button.read {
+  background-color: transparent;
+  color: #28a745;
+  border: 1px solid #28a745;
+  &:hover {
+    background-color: #218838;
+    color: white;
+    border-color: #218838;
   }
 }
