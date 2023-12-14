@@ -734,17 +734,18 @@ export const getClassroomWorkspace = async (id) =>
 export const deleteClassroom = async (id) =>
   makeRequest({
     method: DELETE,
-    path: `${server}/classroom/${id}`,
+    path: `${server}/classrooms/${id}`,
     auth: true,
     error: 'Unable to remove classroom',
   });
-export const createClassroom = async (id, title) =>
+export const createClassroom = async (name, mentors) =>
   makeRequest({
     method: POST,
-    path: `${server}/classroom`,
+    path: `${server}/classrooms`,
     auth: true,
     data: {
-      name: title,
+        name: name,
+        mentors: mentors
     },
     error: 'Unable to create new classroom',
   });

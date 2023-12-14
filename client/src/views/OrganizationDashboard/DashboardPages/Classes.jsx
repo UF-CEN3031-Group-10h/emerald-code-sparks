@@ -37,25 +37,27 @@ export default function OrganizationClasses() {
             }
         });
     }, []);
-        const handleViewClassroom = (classroomId) => {
+   const handleViewClassroom = (classroomId) => {
             navigate(`/classroom/${classroomId}`);
     };
-    function confirmDelete(classroomId) {
-        if (confirm("Are you sure you want to delete this class?")) {
+    const confirmDelete = (classroomId) => {
+        if (confirm("Are you sure you want to delete this class? " + classroomId)) {
             deleteClassroom(classroomId);
+            setUserState(getCurrUser());
         }
 
     }
-    const deleteClass = (classroomId) => {
-
-            deleteClassroom(classroomId);
-        };
-        function newClassroom() {
-            const newClass = {
-                id: newId.current.value,
-                name: newName.current.value
-            }
-            createClassroom(newClass.id, newClass.name);
+    function newClassroom(){
+       // id = newId.current.value;
+        name = newName.current.value;
+        mentor = user.username;
+        const res = createClassroom(name, mentor);
+        if (res.err) {
+            message.error("Fail to create a new class")
+        } else {
+            message.success("Successfully created unit")
+        }
+        setUserState(getCurrUser());
         }
 
         return (
@@ -94,7 +96,7 @@ export default function OrganizationClasses() {
                         <h1 id='card-title'> Add Class </h1>
                         <div id='card-button-container'>
                             <input ref={newName} type="text" placeholder="Name" />
-                            <input ref={newId} type="text" placeholder="Id" />
+                            
                             <button onClick={newClassroom}>
                                 Add
                             </button>
