@@ -731,6 +731,7 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+//these two have an issue with permissions, tend to not work on my end but should work with admin
 export const deleteClassroom = async (id) =>
   makeRequest({
     method: DELETE,
@@ -744,8 +745,7 @@ export const createClassroom = async (name, mentors) =>
     path: `${server}/classrooms`,
     auth: true,
     data: {
-        name: name,
-        mentors: mentors
+        name: name
     },
     error: 'Unable to create new classroom',
   });

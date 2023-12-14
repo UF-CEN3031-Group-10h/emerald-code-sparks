@@ -40,6 +40,7 @@ export default function OrganizationClasses() {
    const handleViewClassroom = (classroomId) => {
             navigate(`/classroom/${classroomId}`);
     };
+    //confirmation for deletion
     const confirmDelete = (classroomId) => {
         if (confirm("Are you sure you want to delete this class? " + classroomId)) {
             deleteClassroom(classroomId);
@@ -47,11 +48,12 @@ export default function OrganizationClasses() {
         }
 
     }
+    //handle for creating a new class
     function newClassroom(){
        // id = newId.current.value;
         name = newName.current.value;
-        mentor = user.username;
-        const res = createClassroom(name, mentor);
+        //mentor = 'teacher';
+        const res = createClassroom(name);
         if (res.err) {
             message.error("Fail to create a new class")
         } else {
